@@ -4,27 +4,40 @@
 
 print "********** Exercise 1.2 **********"
 
-tic_tac_board = 	" | | \
-					--------\
-					 | | \
-					--------\
-					 | | "
-print tic_tac_board
+print "  |  |  \n--------\n  |  |  \n--------\n  |  |  "
 
-print "Not implemented" # Delete this line when you write your code!
+# Alternatively...
 
+# print "  |  |  "
+# print "--------"
+# print "  |  |  "
+# print "--------"
+# print "  |  |  "
 
 print "********** Exercise 1.3 **********"
 
-# Do your work for Excercise 1.3 here. Hint - how many different
-# variables will you need?
+cells = "  |  |  "
+line = "--------"
+new = "\n"
 
-print "Not implemented" # Delete this line when you write your code!
+# Applying usage of variables to 1.2 answer, but ends up being more typing
 
+print cells + new + line + new + cells + new + line + new + cells
+
+# Alternatively...
+
+# print cells
+# print line
+# print cells
+# print line
+# print cells
 
 print "********** Exercise 1.4 **********"
 
-# Do your work for Exercise 1.4 here.
-
-print "Not implemented" # Delete this line when you write your code!
+f_name = raw_input("Enter your first name: ")
+l_name = raw_input("Enter your last name: ")
+mo = raw_input("Enter your date of birth:\nMonth? ")
+day = raw_input("Day? ")
+year = raw_input("Year? ")
+print "%s %s was born on %s %s, %s." % (f_name, l_name, mo, day, year)
 
