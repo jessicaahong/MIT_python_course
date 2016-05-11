@@ -6,7 +6,6 @@ import random
 
 ##### Template for Homework 2, exercises 3.1-3.4  ######
 
-
 # **********  Exercise 3.1 ********** 
 # Define your rock paper scissors function here
 
@@ -44,11 +43,12 @@ def determine_winner(p1_move, p2_move):
 
 # Rock Paper Scissors Function, takes two strings as arguments
 def rps(p1_move, p2_move):
-	if not check_valid_move(p1_move):
+	# Check if p1_move and p2_moves are valid. If either is invalid, exit function.
+	if not check_valid_move(p1_move) or not check_valid_move(p2_move):
 		return
-	if not check_valid_move(p2_move):
-		return
-	determine_winner(p1_move, p2_move)
+	else:
+		# If p1_move and p2_move are both valid, determine winner
+		return determine_winner(p1_move, p2_move)
 
 # Test Cases for Exercise 3.1
 
@@ -66,7 +66,10 @@ class TestRPS(unittest.TestCase):
 		self.assertIs(determine_winner("rock","paper"), determine_winner("scissors","rock"))
 
 	def test_RPS(self):
-		self.assertIsNone(rps("rock","paper"))
+		self.assertIsNotNone(rps("rock","paper"))
+		self.assertEqual(rps("rock","rock"), "We have a tie!")
+		self.assertEqual(rps("paper","scissors"), "Player 2 wins!")
+		self.assertIsNone(rps("banana","rock"))
 
 # *********** Exercise 3.2 ***********
 ## 1 - multadd function

@@ -31,41 +31,9 @@ def determine_winner(p1_move, p2_move):
 
 # Rock Paper Scissors Function, takes two strings as arguments
 def rps(p1_move, p2_move):
-	if not check_valid_move(p1_move):
-		return
-	if not check_valid_move(p2_move):
-		return
-	determine_winner(p1_move, p2_move)
-
-# Test Cases for Exercise 3.1
-##### YOUR CODE HERE #####
-
-import unittest
-
-class TestRPS(unittest.TestCase):
-	def test_ValidMove(self):
-		self.assertTrue(check_valid_move("rock"))
-		self.assertFalse(check_valid_move("rock123"))
-		self.assertTrue(check_valid_move("SCISSORS"))
-
-	def test_DetermineWinner(self):
-		self.assertEqual(determine_winner("rock","paper"), "Player 2 wins!")
-		self.assertEqual(determine_winner("scissors","scissors"), "We have a tie!")
-		self.assertEqual(determine_winner("scissors","paper"), "Player 1 wins!")
-		self.assertIs(determine_winner("rock","paper"), determine_winner("scissors","rock"))
-
-	def test_rps(self):
-		self.assertIsNone(rps("rock","paper"))
-
-def multadd(a, b, c):
-	return a*b+c
-
-## Test Cases for Exercise 3.2
-
-class TestMultadd(unittest.TestCase):
-	def test_multadd(self):
-		self.assertEqual(multadd(1, 3, 2), 5)
-
-if __name__ == '__main__':
-    unittest.main()
-		
+	# Check if p1_move and p2_moves are valid. If either is invalid, exit function.
+	if not check_valid_move(p1_move) or not check_valid_move(p2_move):
+		return "messed up"
+	else:
+		# If p1_move and p2_move are both valid, determine winner
+		determine_winner(p1_move, p2_move)
