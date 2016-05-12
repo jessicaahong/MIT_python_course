@@ -1,6 +1,7 @@
 """Wed May 11 2016"""
 
 def zellers_alg(A, B, C, D):
+	# A, B, C, D are all integers >= 1
 	error = "Invalid input"
 	if (type(A) != int or type(B) != int or type(C) != int or type(D) != int or\
 		A <= 0 or B <= 0 or C < 0 or D < 0):
