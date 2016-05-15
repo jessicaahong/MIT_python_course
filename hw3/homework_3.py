@@ -1,11 +1,11 @@
 """Thurs May 12 2016"""
+import csv
 
 ##### Template for Homework 3, exercises 5.1 - 5.5 ######
 
 # **********  Exercise 5.1 ********** 
 
 # Bugs
-'''Aside '''
 ##### BUG 1 #####
 '''The large_num function sets variable res to a boolean, but never actually returns a value
 
@@ -22,37 +22,37 @@ The second line sets a variable equal to num (which has not been defined).
 Running this test should provide context that clearly defines both the argument value and the returned value.
 
 
-print num = 3
-print 'num =', num, ' negate(num):', negate(num)
-
-# OR
-
 print 'num = 3, negate(num):', negate(3)
+
 '''
 
 ##### BUG 3 #####
 '''
-The two lines that test function large_num don't explicitly declare the value of the argument they're using.
+The two lines that test function large_num don't explicitly print the value of the argument the test is passing.
 The test should clearly define both the argument being passed to large_num, and the returned result.
-You should also test to see what happens when you pass a number > 10000 to the function, and what happens when you pass a number < 10000 to the function.
 
 
-print "1000 is not greater than 10000, large_num(1000) returns", large_num(1000)
-print "15000 is greater than 10000, large_num(15000) returns", large_num(15000)
+print "large_num(1000) is big?", large_num(1000)
+print "large_num(15000) is big?", large_num(15000)
 '''
 
 # **********  Exercise 5.2 ********** 
 
 # Define "Mutable" and list what data structures have this characteristic
+'''
+Mutable objects can be changed in place
 
-# lists
+Mutable data structures: list, dictionary, set, byte array
+'''
 
 
 # Define "Immutable" and list what data structures have this characteristic
+'''
+Immutable objects cannot be altered once created
 
+Immutable data structures: integer, float, long, complex, string, tuple, frozen set, bytes
+'''
 
-# strings
-# tuples
 
 # **********  Exercise 5.3 **********
 
@@ -118,34 +118,32 @@ def print_classes(dept, class_dict):
 
     returns: nothing; simply prints out relevant information
     '''
-    # MIT class numbers are preceded by a course number, while Cal class numbers were preceded by department acronym.
+    # MIT class numbers are preceded by a course number, while UC Berkeley class numbers were preceded by department acronym.
     # Adapted print_classes to print out classes I've taken in a given department.
 
-    # class_numbers is an array of class numbers (keys) in the dictionary
+    # Create variable class_numbers, a list of class numbers (keys) contained in the dictionary
     class_numbers = class_dict.keys()
-    # number is a count of how many classes in the dictionary are in the selected department
+    # Create variable number, a count of how many entries in the dictionary are in the selected department
     number = 0
     for item in class_numbers:
-        # if a class has a class number associated with the department, print the class number and name. increment number by 1.
+        # If a class has a class number associated with the department, print the class number and name. Increment number by 1.
         if item[0:len(dept)] == dept:
             print "%s - %s" % (item, class_dict[item])
             number += 1
-    # if no class numbers are associated with the department, print message
+    # If no class numbers are associated with the department, print message
     if number == 0:
         print "No classes taken in that department"
     
 
 # Test Cases for Exercise 5.4
 add_class("MCB32","Intro to Human Physiology", DICTIONARY)
-print "Added MCB32: Intro to Human Physiology to DICTIONARY:",  DICTIONARY
+print "add_class('MCB32','Intro to Human Physiology', DICTIONARY). Added class MCB32: Intro to Human Physiology to DICTIONARY:",  DICTIONARY
 print "Here is the class (1) you've taken in the PACS department. print_classes('PACS', DICTIONARY):", print_classes("PACS", DICTIONARY)
 print "You haven't taken any classes in the ENG department. print_classes('ENG', DICTIONARY):", print_classes("ENG", DICTIONARY)
 
 
 
 # **********  Exercise 5.5 **********
-
-import csv
 
 def buildAddrBook(fileName):
     '''
@@ -191,21 +189,21 @@ def changeEntry(addrBook, entry, field, newValue):
 
     returns: nothing; only modifies addrBook
     '''
-    # if entry does not exist in address book, print error message
+    # If entry does not exist in address book, print error message
     if (entry not in addrBook.keys()):
         print "Invalid Entry: %s" % entry
     else:
-        # if field to edit is name, create new key for entryl, point new key to prior value, and delete old key
+        # If field to edit is 'name', create new key for entry, point new key to prior value, and delete old key
         if field == 'name':
             addrBook[newValue] = addrBook[entry]
             del addrBook[entry]
-        # if field to edit is phone number, edit the appropriate entry's list[0]
+        # If field to edit is 'phoneNumber', edit the appropriate entry's value (list[0])
         elif field == 'phoneNumber':
             addrBook[entry][0] = newValue
-        # if field to edit is email address, add new email address to appropriate entry's list
+        # If field to edit is 'emailAddress', add new email address to appropriate entry's list
         elif field == 'emailAddress':
             addrBook[entry].append(newValue)
-        # if entry is not one of the accepted fields, print error message
+        # If entry is not one of the accepted fields, print error message
         else:
             print "Unexpected field: %s" % field
 

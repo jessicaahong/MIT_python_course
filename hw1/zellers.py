@@ -1,8 +1,19 @@
 """Wed May 11 2016"""
+import unittest
 
 def zellers_alg(A, B, C, D):
-	# A, B, C, D are all integers >= 1
+	'''
+	where A, B, C, D are all integers >= 1.
+	A = the month of the year, with March having the value 1, April the
+	value 2, . . ., December the value 10, and January and February being
+	counted as months 11 and 12 of the preceding year (in which
+	case,subtract 1 from C)
+	B = the day of the month (1, 2, 3, . . . , 30, 31)
+	C = the year of the century (e.g. C = 89 for the year 1989)
+	D = the century (e.g. D = 19 for the year 1989)
+	'''
 	error = "Invalid input"
+	# If any of the inputs are not integers, or if the month/day/year/century values are invalid, return error
 	if (type(A) != int or type(B) != int or type(C) != int or type(D) != int or\
 		A <= 0 or B <= 0 or C < 0 or D < 0):
 		return error
@@ -10,10 +21,11 @@ def zellers_alg(A, B, C, D):
 		return error
 	if (B > 31):
 		return error
-	if A == 11 or A == 12:
+	# If A == 11 or 12, treat them as months 11 and 12 belonging to the preceding year (subtract 1 from C)
+	if A > 10:
 		C -= 1
 	# Realized that we need to accommodate for edge cases such as turn of the century
-	# If the year was 1900 and it's January or February, algorithm must be tweaked to roll back 1 century and set year to 99
+	# If the year was 1900 and it's January or February, algorithm must be tweaked to roll back 1 century (D -= 1) and set year to 99 (C = 99)
 	if C == -1:
 		D -= 1
 		C = 99
@@ -38,28 +50,23 @@ def zellers_statement():
 	year_str = raw_input("What year were you born in?\n\
 	Please enter complete year (e.g. 1950): ")
 
+	# Check to make sure month, day, year are integers
 	try:
 		mo = int(mo_str)
 		day = int(day_str)
 		year = int(year_str)
 		print "THIS IS THE YEAR %s" % year
+	# If any one is not, print error message and display prompts again (make recursive call)
 	except ValueError:
 		print "Birthdate input is invalid."
 		zellers_statement()
 	else:
-		# Tried to accommodate for years prior to year 1000
-		if len(year_str) <= 2:
-			century = 0
-			yr_century = int(year_str)
-		elif len(year_str) == 3:
-			century = int(year_str[0])
-			print "THIS IS THE CENTURY %s" % century
-			yr_century = int(year_str[1:3])
-			print "THIS IS THE YR_CENTURY %s" % yr_century
-		else:
-			century = int(year_str[0:(len(year_str)-2)])
-			yr_century = int(year_str[(len(year_str)-2):len(year_str)])
+		# Calculate year of century using modulus operator, century using division
+		yr_century = year % 100
+		century = year / 100
+		# Plug transformed variables into zellers_alg function, save return value to variable result
 		result = zellers_alg(mo, day, yr_century, century)
+		# Create variable day_of_week based on result. If result is not an integer between 1-6, return error from zellers_alg function
 		if result == 0:
 			day_of_week = "Sunday"
 		elif result == 1:
@@ -75,17 +82,19 @@ def zellers_statement():
 		elif result == 6:
 			day_of_week = "Saturday"
 		else:
-			return result
+			print result
+			return
 		message = "%s %s was born on a %s." % (f_name, l_name, day_of_week)
 		print message
 		return message
 
-import unittest
+zellers_statement()
 
 class TestZellersAlg(unittest.TestCase):
 	def testAlg(self):
 		self.assertEqual(zellers_alg(6,17,91,19), 6)
 		self.assertEqual(zellers_alg(11,1,00,18), 3)
+		self.assertEqual(zellers_alg(11,15,00,22), 3)
 		self.assertEqual(zellers_alg(4,-17,61,18), "Invalid input")
 		self.assertEqual(zellers_alg(1,1,"banana", "banana"), "Invalid input")
 

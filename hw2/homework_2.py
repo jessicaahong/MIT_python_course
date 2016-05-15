@@ -7,22 +7,16 @@ import random
 ##### Template for Homework 2, exercises 3.1-3.4  ######
 
 # **********  Exercise 3.1 ********** 
-# Define your rock paper scissors function here
 
 # Function to check if move is valid. If not, prints "This is not a valid object selection"
 def check_valid_move(move):
-	# Checks if move contains digits
-	try:
-		int(move)
-		print str(move) + " is not a valid object selection"
+	# If move is a string, and move.lower() equals 'rock', 'paper' or 'scissors', return True
+	if (type(move) is str) and (move.lower() == "rock" or move.lower() == "paper" or move.lower() == "scissors"):
+		return True
+	# Else print error message and return False
+	else:
+		print "%s is not a valid object selection" % move
 		return False
-	except ValueError:
-		# Checks if move is "rock", "paper", or "scissors"
-		if move.lower() == "rock" or move.lower() == "paper" or move.lower() == "scissors":
-			return True
-		else:
-			print move + " is not a valid object selection"
-			return False
 
 # Function to determine winner
 def determine_winner(p1_move, p2_move):
@@ -43,12 +37,17 @@ def determine_winner(p1_move, p2_move):
 
 # Rock Paper Scissors Function, takes two strings as arguments
 def rps(p1_move, p2_move):
-	# Check if p1_move and p2_moves are valid. If either is invalid, exit function.
+	'''
+	Rock paper scissors function that returns a winner.
+	Arguments p1_move and p2_move should be strings that choose rock, paper or scissors.
+	'''
+	# Check if p1_move and p2_moves are valid. If either is invalid, return and end game.
 	if not check_valid_move(p1_move) or not check_valid_move(p2_move):
 		return
+	# Else if p1_move and p2_move are both valid, determine winner
 	else:
-		# If p1_move and p2_move are both valid, determine winner
 		return determine_winner(p1_move, p2_move)
+
 
 # Test Cases for Exercise 3.1
 
@@ -57,7 +56,7 @@ class TestRPS(unittest.TestCase):
 		self.assertTrue(check_valid_move("rock"))
 		self.assertFalse(check_valid_move("rock123"))
 		self.assertTrue(check_valid_move("SCISSORS"))
-		self.assertFalse(check_valid_move("banana"))
+		self.assertFalse(check_valid_move(1))
 
 	def test_DetermineWinner(self):
 		self.assertEqual(determine_winner("rock","paper"), "Player 2 wins!")
@@ -70,6 +69,7 @@ class TestRPS(unittest.TestCase):
 		self.assertEqual(rps("rock","rock"), "We have a tie!")
 		self.assertEqual(rps("paper","scissors"), "Player 2 wins!")
 		self.assertIsNone(rps("banana","rock"))
+		self.assertIsNone(rps(1,2))
 
 # *********** Exercise 3.2 ***********
 ## 1 - multadd function
@@ -80,12 +80,10 @@ def multadd(a, b, c):
 ## 2 - Equations
 
 angle_test = multadd(0.5, math.cos(math.pi/4), math.sin(math.pi/4))
-print "sin(pi/4) + cos(pi/4)/2 is:"
-print angle_test
+print "sin(pi/4) + cos(pi/4)/2 is:", angle_test
 
 ceiling_test = multadd(2, math.log(12, 7), math.ceil(276/float(19)))
-print "ceiling(276/19) + 2 log_7(12) is:"
-print ceiling_test
+print "ceiling(276/19) + 2 log_7(12) is:", ceiling_test
 
 ## 3 - yikes function
 def yikes(num):
@@ -93,8 +91,7 @@ def yikes(num):
 	return answer
 
 # Sample Test Cases
-x = 5
-print "yikes(5) =", yikes(x)
+print "yikes(5) =", yikes(5)
 
 # Test Cases for Exercise 3.2
 class TestMathModule(unittest.TestCase):
@@ -143,10 +140,8 @@ class TestRandomModule(unittest.TestCase):
 		self.assertEqual(roll_dice('banana', 5), "Arguments must be positive integers")
 		self.assertEqual(roll_dice(-14,5), "Arguments must be positive integers")
 
-# Run test cases from the command line
 
-# if __name__ == '__main__':
-# 	unittest.main()
+# Run test cases from the command line
 
 suite1 = unittest.TestLoader().loadTestsFromTestCase(TestRPS)
 suite2 = unittest.TestLoader().loadTestsFromTestCase(TestMathModule)

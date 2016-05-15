@@ -1,4 +1,5 @@
 """Wed May 11 2016"""
+import unittest
 
 def play_nims(pile, max_stones):
 	'''
@@ -18,7 +19,7 @@ def play_nims(pile, max_stones):
 	while pile > 0:
 		valid_move = False
 		# Ask player's move
-		while not valid_move:
+		while valid_move == False:
 			stones_removed = raw_input("Player %s's move! Pick a number from 1 to %s: " % (current_player, max_stones))
 			try:
 				stones_removed_int = int(stones_removed)
@@ -31,10 +32,11 @@ def play_nims(pile, max_stones):
 					print "That is an invalid selection. Must pick a number from 1 to %s, and choice must be smaller than pile." % max_stones
 		# Execute player's move if move is valid
 		pile -= stones_removed_int
-		print pile
+		# If pile is now zero, game is won. Print message, terminate game.
 		if pile == 0:
 			print "Player %s wins!" % current_player
 			return "Game Over"
+		# Else, print informational message, continue game
 		else:
 			print "There are now %s stones left." % pile
 		# Switch players when pile is still greater than 0
@@ -43,12 +45,10 @@ def play_nims(pile, max_stones):
 		else:
 			current_player = 1
 
-import unittest
-
 class TestNims(unittest.TestCase):
 	def testNims(self):
 		self.assertEqual(play_nims(-4,10), "Arguments must be positive integers")
-		self.assertEqual(play_nims(banana,10), "Arguments must be positive integers")
+		self.assertEqual(play_nims("banana",10), "Arguments must be positive integers")
 		self.assertEqual(play_nims(100,5), "Game Over")
 
 if __name__ == '__main__':

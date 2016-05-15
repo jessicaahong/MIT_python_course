@@ -30,23 +30,23 @@ def cumulative_sum(number_list):
 print "cumulative_sum of [4, 3, 6] is:", cumulative_sum([4, 3, 6])
 print "cumulative_sum of [100, 10, 1] is:", cumulative_sum([100, 10, 1])
 print "cumulative_sum of [50, 60, 70] is:", cumulative_sum([50, 60, 70])
+print "cumulative_sum of [-50, 60.5, 70] is:", cumulative_sum([-50, 60.5, 70])
 
 # **********  Exercise 4.2 **********
-
-# Write any helper functions you need here.
 
 VOWELS = ['a', 'e', 'i', 'o', 'u']
 
 def pig_latin(word):
     # word is a string to convert to pig-latin
+
     if word[0].lower() in VOWELS:
         return word + "hay"
     else:
         return word[1:] + word[0].lower() + "ay"
 
 # Test Cases
-print pig_latin('alabama') + " returns alabamahay"
-print pig_latin('jamboree') + " returns amboreejay"
-print pig_latin('Nicholas') + " returns icholasnay"
-print pig_latin('HELLO') + " returns ELLOhay"
-# **********  HW 2 complete! *********
+print "pig_latin('alabama') returns:", pig_latin('alabama') 
+print "pig_latin('jamboree') returns:", pig_latin('jamboree')
+print "pig_latin('Nicholas') returns:", pig_latin('Nicholas')
+print "pig_latin('HELLO') returns:", pig_latin('HELLO')
+
