@@ -6,6 +6,14 @@ def is_int(list):
 	output = [i for i in list if isinstance(i, int)]
 	print output
 
+	'''
+	Rewritten as for loop:
+	output = []
+	for i in list:
+		if isinstance(i, int):
+			output.append(i)
+	'''
+
 def solve_eqn():
 	'''
 	Solves the equation y = x**2 + 1.
@@ -13,6 +21,16 @@ def solve_eqn():
 	'''
 	output = [(x,y) for x in range(-5,6) for y in range (0,11) if y == (x**2 + 1)]
 	print output
+
+	'''
+	Rewritten as for loop:
+	output = []
+	for x in range(-5,6):
+		for y in range(0, 11):
+			if y ==(x**2 + 1):
+				output.append((x,y))
+	print output
+	'''
 
 
 '''
@@ -26,3 +44,13 @@ def solve_circle_eqn(a,b):
 	'''
 	output = [(x + a, y + b) for x in range(-5,6) for y in range (-5,6) if (x**2 + y**2 == 5**2)]
 	print output
+
+	'''
+	Rewritten as for loop:
+	output = []
+	for x in range(-5,6):
+		for y in range(-5,6):
+			if (x**2 + y**2 == 5**2):
+				output.append((x + a, y + b))
+	print output
+	'''
